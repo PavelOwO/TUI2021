@@ -93,8 +93,9 @@ def main():
         # movement()
 
         back_to_front = open("../config.json", "w")
-        back_to_front.write("data = ")
+        back_to_front.write("data = \'")
         json.dump(makeJson(), back_to_front)
+        back_to_front.write("\'")
 
         print("done!")# <<<<<<<<<<<<<<<<<<<COMMENT THIS
         # time.sleep(10)

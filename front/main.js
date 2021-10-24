@@ -27,8 +27,8 @@ function getMap() {
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawCrossroads();
     drawRoads();
+    drawCrossroads();
     drawCars();
 }
 
@@ -39,28 +39,33 @@ function drawCar(x, y) {
 
 function drawCrossroad(x, y, n) {
     ctx.fillStyle = "green";
-    ctx.fillRect(x * line_width * 2, y * line_width * 2, line_width * 2, line_width * 2);
+    ctx.fillRect(x * line_width, y * line_width, line_width * 2, line_width * 2);
 }
 
 function drawRoad(crossroad_1, crossroad_2) {
-    // ctx.fillStyle = "blue";
-    // var cr1 = {x: crossroads[crossroad_1].x, y: crossroads[crossroad_1].y};
-    // var cr2 = {x: crossroads[crossroad_2].x, y: crossroads[crossroad_2].y};
+    ctx.fillStyle = "gray";
+    if(crossroad_1 > crossroad_2) {
+        [crossroad_1, crossroad_2] = [crossroad_2, crossroad_1]
+    }
+    var cr1 = {x: crossroads[crossroad_1].x, y: crossroads[crossroad_1].y};
+    var cr2 = {x: crossroads[crossroad_2].x, y: crossroads[crossroad_2].y};
 
-    // var road_length = 2 * line_width;
-    // var road_width = 2 * line_width;
-    // var rx = cr1.x;
-    // var ry = cr1.y;
+    var road_length = 2 * line_width;
+    var road_width = 2 * line_width;
+    var rx = cr1.x;
+    var ry = cr1.y;
 
-    // if(cr1.x == cr2.x) {
-    //     road_width = Math.abs(cr1.y - cr1.y) - 2 * line_width;
-    //     ry += 2 * line_width;
-    // }
-    // else {
-    //     road_length = Math.abs(cr1.x - cr1.x);
-    //     rx += 2 * line_width;
-    // }
-    // ctx.fillRect(rx * line_width, ry * line_width, road_length * line_width, road_width * line_width);
+    if(cr1.x == cr2.x) {
+        road_width = Math.abs(cr2.y - cr1.y) * line_width;
+    }
+    else if (cr1.y == cr2.y){
+        road_length = Math.abs(cr2.x - cr1.x) * line_width;
+    }
+    else {
+        console.log("road beetwin "+crossroad_1+" and "+crossroad_2+" can't be drawen")
+        return;
+    }
+    ctx.fillRect(rx * line_width, ry * line_width, road_length, road_width);
 
 }
 
@@ -78,14 +83,13 @@ function drawCrossroads() {
 }
 
 function drawRoads() {
-    // for(var i = 0; i < roads.length; i++){
-    //     drawRoad(roads[i].crossroad_start - 1, roads[i].crossroad_finish - 1)
-    // }
+    for(var i = 0; i < roads.length; i++){
+        drawRoad(roads[i].crossroad_start - 1, roads[i].crossroad_finish - 1)
+    }
 }
 
 function mapMain() {
     getMap();
-    getRoads();
     draw();
 }
 
