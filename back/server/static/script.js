@@ -1,9 +1,8 @@
 canvas = document.getElementById("canvas-area");
 ctx = canvas.getContext("2d");
 
-function test() {
-    var data = JSON.parse(coordinates);
-    console.log(data);
-}
+await fetch('file.json')
+    .then(response => response.json())
+    .then(jsonResponse => console.log(jsonResponse))
 
-setInterval(test, 1000);
+// setInterval(test, 1000);
