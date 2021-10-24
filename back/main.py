@@ -1,6 +1,7 @@
 from math import *
 import time
 import json
+from data import data 
 
 #-----------------------------
 deltaT = 10
@@ -84,17 +85,19 @@ def makeJson():
 
 
 def main():
-    while True:
-        front_to_back = open("../config.json", "r")
-        data = dict(json.load(front_to_back))
+    # while True:
+        # front_to_back = open("../config.json", "r")
+        # data = dict(json.load(front_to_back))
         
         initMap(data)
-        movement()
+        # movement()
 
         back_to_front = open("../config.json", "w")
+        back_to_front.write("data = ")
         json.dump(makeJson(), back_to_front)
 
-        time.sleep(10)
+        print("done!")# <<<<<<<<<<<<<<<<<<<COMMENT THIS
+        # time.sleep(10)
 
 
 if __name__ == "__main__":
