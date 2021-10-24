@@ -13,7 +13,6 @@ console.log(json);
 var cars_amount = 0;
 var cars = [];
 var roads = [];
-var lines = [];
 var crossroads = [];
 
 var line_width = 15;
@@ -21,27 +20,10 @@ var car_width = 10;
 
 function getMap() {
     crossroads = json["crossroad_param"];
-    lines = json["roads_param"];
+    roads = json["roads_param"];
     cars = json["cars_param"];
 }
 
-function getRoads() {
-    var used = [];
-    for(var i = 0; i < lines.length; i++) {
-        used[i] = false;
-    }
-    for(var i = 0; i < lines.length; i++) {
-        if(used[i] == false) {
-            used[i] == true
-        }
-        else {
-            continue;
-        }
-        for(var j = i + 1; j < lines.length; j++) {
-
-        }
-    }
-}
 
 function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
